@@ -1,0 +1,360 @@
+﻿@model Retenciones.Models.Gestion
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MotivoFinal.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MotivoFinal.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MotivoInicial.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MotivoInicial.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SeDeriva.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SeDeriva.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UsuarioDeriva.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UsuarioDeriva.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CodigoSGA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CodigoSGA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DNI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DNI)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TelefonoContacto1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TelefonoContacto1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TelefonoContacto2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TelefonoContacto2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TelefonoContacto3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TelefonoContacto3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Contrato)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contrato)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ResultadoRetencion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ResultadoRetencion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoSolicitud)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoSolicitud)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CambioPlanMigracion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CambioPlanMigracion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Decos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Decos)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Canales)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Canales)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NuevoPrecio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NuevoPrecio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FueRetenido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FueRetenido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Escoja)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Escoja)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Porque)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Porque)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Origen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Origen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Locacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Locacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Observaciones)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Observaciones)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NroInteraccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NroInteraccion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pendiente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pendiente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlantillaMigracion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlantillaMigracion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SOTMigracion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SOTMigracion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EstadoSOTMigracion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstadoSOTMigracion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlantillaVisitaTecnica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlantillaVisitaTecnica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SOTVisitaTecnica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SOTVisitaTecnica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EstadoSOTVisitaTecnica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstadoSOTVisitaTecnica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlantillaTrasladoExternoSGA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlantillaTrasladoExternoSGA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SOTTrasladoExternoSGA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SOTTrasladoExternoSGA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EstadoSOTTrasladoExternoSGA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstadoSOTTrasladoExternoSGA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlantillaPromocionSGA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlantillaPromocionSGA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlantillaSuspensionTemporal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlantillaSuspensionTemporal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlantillaRegistroRetenidos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlantillaRegistroRetenidos)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlantillaSeguimientoSOT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlantillaSeguimientoSOT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Asesor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Asesor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaGestion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaGestion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Regresar a la lista", "Index")
+</p>

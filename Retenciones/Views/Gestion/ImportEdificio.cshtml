@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "Importación Edificios Liberados";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+@using (Html.BeginForm("ImportEdificio", "Gestion", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="form-horizontal">
+        <hr />
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="file" name="UploadedFile" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" required="required" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <p class="help-block">Sólo archivos XLSX (Excel 2007+)</p>
+            </div>
+        </div>
+
+        <p class="text-danger">Asegúrese de tener las cabeceras correctas (misma cantidad de columnas) para evitar errores en la carga.</p>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Importar" name="Importar" class="btn btn-primary" />
+            </div>
+        </div>
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger" role="alert">@ViewBag.Error</div>
+        }
+
+        @if (ViewBag.Importados != null)
+        {
+            <div class="alert alert-success" role="alert">@ViewBag.Importados</div>
+        }
+
+    </div>
+}

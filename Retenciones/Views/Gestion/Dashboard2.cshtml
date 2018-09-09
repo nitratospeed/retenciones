@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+}
+
+<h2>Dashboard <small>(Por Fechas)</small></h2>
+
+<hr />
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <input id="FechaInicio" name="FechaInicio" class="datepicker" value="@DateTime.Now.Date.ToString("dd/MM/yyyy")" />
+        <input id="FechaFin" name="FechaFin" class="datepicker" value="@DateTime.Now.Date.ToString("dd/MM/yyyy")" />
+        <button id="BtnBuscar" type="button">Buscar</button>
+    </div>
+    <div id="Partial"></div>
+</div>
+
+@section Styles {
+    @Styles.Render("~/Content/jqueryuicss")
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/dashboard2")
+}

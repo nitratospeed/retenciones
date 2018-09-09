@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "Importar Carruseles";
+}
+
+<h2>Importar Carruseles</h2>
+
+@using (Html.BeginForm("Import", "GestionCarruseles", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="form-horizontal">
+        <hr />
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="file" name="UploadedFile" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" required="required" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <p class="help-block">Sólo archivos XLSX (Excel 2007+)</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Importar" name="Importar" class="btn btn-primary" />
+            </div>
+        </div>
+
+
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger" role="alert">ERROR: @ViewBag.Error</div>
+        }
+
+        @if (ViewBag.Importados != null)
+        {
+            <h3>Se analizaron @ViewBag.Analizados registros</h3>
+            <h3>Se importaron @ViewBag.Importados registros, de los cuales:</h3>
+            <h3>Se descartaron @ViewBag.Descartados registros por filtro</h3>
+            <h3>Se descartaron @ViewBag.Duplicados registros por duplicidad</h3>
+        }   
+
+    </div>
+}

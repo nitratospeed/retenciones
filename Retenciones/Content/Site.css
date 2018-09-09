@@ -1,0 +1,119 @@
+﻿body {
+    /*color: white;
+    background-color: black;*/
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+/*input,
+select
+{
+    max-width: 280px;
+}*/
+
+textarea {
+    max-width: 1110px;
+}
+
+.rbcreate {
+    height: 18px;
+    width: 18px;
+}
+
+.verticalOfre input[type=radio] {
+    height: 10px;
+    width: 10px;
+}
+
+.verticalOfre p {
+    margin: 0
+}
+
+.modal-body.resizemodal {
+    font-size: smaller;
+    max-height: calc(100vh - 210px);
+    overflow-y: auto;
+}
+
+.DialogOfre {
+    width: calc(100% - 210px);
+}
+
+textarea.form-control.pmig {
+    height: 220px;
+}
+
+textarea.form-control.pvis {
+    height: 120px;
+}
+
+textarea.form-control.ptras {
+    height: 180px;
+}
+
+textarea.form-control.ppro {
+    height: 200px;
+}
+
+textarea.form-control.psus {
+    height: 200px;
+}
+
+textarea.form-control.preg {
+    height: 300px;
+}
+
+textarea.form-control.pseg {
+    height: 120px;
+}
+
+textarea.form-control.promsiac {
+    height: 220px;
+}
+
+textarea.form-control.promadel {
+    height: 235px;
+}
+
+textarea.form-control.alerta {
+    height: 220px;
+}
+
+textarea.form-control.speecharea {
+    height: 400px;
+}
+
+.modaltable {
+    margin: 0px;
+}
+
+
+.modal-body.modalpromo {
+    max-height: calc(100vh - 210px);
+    overflow-y: auto;
+}
+
+pre {
+    background-color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold
+}
+
+.modal-body {
+    max-height: calc(100vh - 210px);
+    overflow-y: auto;
+}

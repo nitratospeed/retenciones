@@ -1,0 +1,95 @@
+﻿@{
+    ViewBag.Title = "Usuarios";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+<hr />
+
+<p>
+    @Html.ActionLink("Crear Nuevo Usuario", "Register")
+</p>
+
+<hr />
+
+<div class="table-responsive">
+    <table class="table table-hover table-condensed">
+        <thead>
+            <tr>
+                @foreach (System.Data.DataColumn col in Model.Columns)
+                {
+                    <th>@col.Caption</th>
+                }
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (System.Data.DataRow row in Model.Rows)
+            {
+                <tr>
+                    <td class="TdNombres">@row.ItemArray[0].ToString()</td>
+                    <td class="TdUsuario">@row.ItemArray[1].ToString()</td>
+                    <td>@row.ItemArray[2].ToString()</td>
+                    @if (row.ItemArray[3].ToString() == "False")
+                    {
+                    <td class="TdEstado">INACTIVO</td> }
+                    else
+                    {
+                    <td class="TdEstado">ACTIVO</td> }
+                    <td class="TdPerfil" style="display:none">@row.ItemArray[4].ToString()</td>
+                    <td class="TdId" style="display:none">@row.ItemArray[5].ToString()</td>
+                    <td>
+                        <a class="BtnEdit" href="#" data-value="@row.ItemArray[5]">Editar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Editar.</h4>
+            </div>
+            <div class="modal-body">
+
+                @Html.Hidden("Id")
+                @Html.Hidden("Usuario")
+
+                <div class="form-group">
+                    @Html.Label("Nombres y Apellidos", htmlAttributes: new { @class = "control-label" })
+                    @Html.Editor("Nombres", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Perfil", htmlAttributes: new { @class = "control-label" })
+                    @Html.DropDownList("Perfil", null, "SELECCIONE", htmlAttributes: new { @class = "form-control" })
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Estado (Activo/Inactivo)", htmlAttributes: new { @class = "control-label" })
+                    <p><input type="checkbox" id="Estado" name="Estado" /></p>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Resetear Contraseña?", htmlAttributes: new { @class = "control-label" })
+                    <p><input type="checkbox" id="Reseteo" name="Reseteo" /></p>
+                </div>
+
+                <div id="DivPassword" class="form-group" style="display:none">
+                    <p>La nueva contraseña será la misma que su usuario.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="BtnActualizar" type="button" class="btn btn-primary">Actualizar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/accountindex")
+}

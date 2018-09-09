@@ -1,0 +1,96 @@
+﻿@model IEnumerable<Retenciones.Models.Gestion>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+@if (User.IsInRole("Asesor"))
+{
+    <p>
+        @Html.ActionLink("Nuevo Registro", "Create")
+    </p>
+}
+
+<table class="table table-hover table-responsive">
+    <caption>
+        @if (User.IsInRole("Asesor"))
+        {
+            <p>
+                @ViewBag.Avance
+            </p>
+        }
+        @using (Html.BeginForm())
+        {
+            <p>
+                Filtrar por fechas: 
+                <input class="datepicker" placeholder="@DateTime.Today.ToString("dd/MM/yyyy")" name="fecha1" value="@ViewBag.Fecha1" />
+                <input class="datepicker" placeholder="@DateTime.Today.ToString("dd/MM/yyyy")" name="fecha2" value="@ViewBag.Fecha2" />
+                <input type="submit" value="Buscar" name="Fechas" />
+            </p>
+        }
+    </caption>
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CodigoSGA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreCliente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ResultadoRetencion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NroInteraccion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaGestion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CodigoSGA)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreCliente)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ResultadoRetencion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NroInteraccion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaGestion)
+                </td>
+                <td>
+                    @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |*@
+                    @Html.ActionLink("Detalles", "Details", new { id = item.Id })
+                    @*@Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Styles {
+    @Styles.Render("~/Content/jqueryuicss")
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
+}

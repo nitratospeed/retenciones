@@ -1,0 +1,245 @@
+﻿@model Retenciones.Models.GestionCarruseles
+
+@if (Model.FechaGestion == null)
+{
+    ViewBag.Title = "Registro";
+    <h2>Registro</h2>
+}
+else
+{
+    ViewBag.Title = "Editar";
+    <h2>Editar</h2>
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.RadioButtonFor(model => model.Carrusel, true, htmlAttributes: new { id="ChkCarrusel" })@Html.Label("Carrusel")
+            @Html.RadioButtonFor(model => model.Carrusel, false, htmlAttributes: new { id = "ChkNoCarrusel" })@Html.Label("No Carrusel")
+        </div>
+
+        <div id="Ocultar">
+
+            <div class="form-group">
+                <h4><i>CLIENTE ANTIGUO</i></h4>
+            </div>
+
+            <dl class="dl-horizontal">
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.CodigoSGAAntiguo)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CodigoSGAAntiguo)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ClienteAntiguo)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ClienteAntiguo)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.DireccionAntiguo)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DireccionAntiguo)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.DistritoAntiguo)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DistritoAntiguo)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.DepartamentoAntiguo)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DepartamentoAntiguo)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ProyectoAntiguo)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ProyectoAntiguo)
+                </dd>
+
+            </dl>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TipoAplicativoAntiguo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.TipoAplicativoAntiguo, new SelectListItem[]{
+                new SelectListItem() {Text = "SIAC", Value="SIAC"},
+                new SelectListItem() {Text = "SGA", Value="SGA"}}, "SELECCIONE", htmlAttributes: new { @class = "form-control", @style = "max-width: 280px;" })
+                    @Html.ValidationMessageFor(model => model.TipoAplicativoAntiguo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group" id="DivIncidenciaAntiguo" style="display:none;">
+                @Html.LabelFor(model => model.IncidenciaAntiguo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.IncidenciaAntiguo, new { htmlAttributes = new { @class = "form-control", @style = "max-width: 280px;" } })
+                    @Html.ValidationMessageFor(model => model.IncidenciaAntiguo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group" id="DivInteraccionAntiguo" style="display:none;">
+                @Html.LabelFor(model => model.InteraccionAntiguo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.InteraccionAntiguo, new { htmlAttributes = new { @class = "form-control", @style = "max-width: 280px;" } })
+                    @Html.ValidationMessageFor(model => model.InteraccionAntiguo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="form-group">
+                <h4><i>CLIENTE NUEVO</i></h4>
+            </div>
+
+            <hr />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.FechaInstalacionNuevo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.FechaInstalacionNuevo, new { htmlAttributes = new { @class = "form-control datepicker", @style = "max-width: 280px;" } })
+                    @Html.ValidationMessageFor(model => model.FechaInstalacionNuevo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CodigoSGANuevo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CodigoSGANuevo, new { htmlAttributes = new { @class = "form-control", @style = "max-width: 280px;" } })
+                    @Html.ValidationMessageFor(model => model.CodigoSGANuevo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ClienteNuevo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ClienteNuevo, new { htmlAttributes = new { @class = "form-control", @style = "max-width: 280px;" } })
+                    @Html.ValidationMessageFor(model => model.ClienteNuevo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SOTAltaNuevo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SOTAltaNuevo, new { htmlAttributes = new { @class = "form-control", @style = "max-width: 280px;" } })
+                    @Html.ValidationMessageFor(model => model.SOTAltaNuevo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DireccionNuevo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DireccionNuevo, new { htmlAttributes = new { @class = "form-control", @style = "max-width: 280px;" } })
+                    @Html.ValidationMessageFor(model => model.DireccionNuevo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DistritoNuevo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DistritoNuevo, new { htmlAttributes = new { @class = "form-control", @style = "max-width: 280px;" } })
+                    @Html.ValidationMessageFor(model => model.DistritoNuevo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DepartamentoNuevo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DepartamentoNuevo, new { htmlAttributes = new { @class = "form-control", @style = "max-width: 280px;" } })
+                    @Html.ValidationMessageFor(model => model.DepartamentoNuevo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ProyectoNuevo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ProyectoNuevo, new { htmlAttributes = new { @class = "form-control", @style = "max-width: 280px;" } })
+                    @Html.ValidationMessageFor(model => model.ProyectoNuevo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ParentescoNuevo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ParentescoNuevo, new { htmlAttributes = new { @class = "form-control", @style = "max-width: 280px;" } })
+                    @Html.ValidationMessageFor(model => model.ParentescoNuevo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+       </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Observacion, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Observacion, new { htmlAttributes = new { @class = "form-control", @style = "max-width: 280px;" } })
+                    @Html.ValidationMessageFor(model => model.Observacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+        @if (Model.Pendiente != true)
+        {
+            <div class="form-group">
+                @Html.Label("MARCAR COMO PENDIENTE?", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.CheckBoxFor(model => model.Pendiente)
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="form-group">
+                <p>Ahora esta gestión se guardará como NO PENDIENTE.</p>
+            </div>
+        }
+            <div class="form-group" style="display:none;">
+                @Html.LabelFor(model => model.FechaGestion, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.FechaGestion, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FechaGestion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Registrar" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+}
+
+<div>
+    @Html.ActionLink("Regresar a la lista", "Index")
+</div>
+
+@section Styles {
+    @Styles.Render("~/Content/jqueryuicss")
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/Scripts/datepicker.js")
+    @Scripts.Render("~/bundles/gestioncarruselesedit")
+}

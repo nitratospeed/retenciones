@@ -1,0 +1,196 @@
+﻿<div class="form-group col-sm-2">
+    @Html.Label("Cargo Fijo", htmlAttributes: new { @class = "control-label" })
+    @Html.Editor("CargoFijoCalc", new { htmlAttributes = new { @class = "form-control", @placeholder = "S./" } })
+</div>
+
+<div class="form-group col-sm-2">
+    @Html.Label("% Dscto", htmlAttributes: new { @class = "control-label" })
+    @Html.DropDownList("DescuentoCalc", new SelectListItem[]{
+                new SelectListItem() {Text = "50%", Value="0.50"},
+                new SelectListItem() {Text = "75%", Value="0.75"}}, "SELECC.", htmlAttributes: new { @class = "form-control" })
+</div>
+
+<div class="form-group col-sm-2">
+    @Html.Label("Mes a Aplicar", htmlAttributes: new { @class = "control-label" })
+    @Html.DropDownList("MesAplicarCalc", new SelectListItem[]{
+                new SelectListItem() {Text = "1", Value="1"},
+                new SelectListItem() {Text = "2", Value="2"},
+                new SelectListItem() {Text = "3", Value="3"},
+                new SelectListItem() {Text = "4", Value="4"}}, "SELECC.", htmlAttributes: new { @class = "form-control" })
+</div>
+
+<div class="form-group col-sm-2">
+    @Html.Label("Ciclo", htmlAttributes: new { @class = "control-label" })
+    @Html.DropDownList("CicloCalc", new SelectListItem[]{
+                new SelectListItem() {Text = "1", Value="1"},
+                new SelectListItem() {Text = "2", Value="2"},
+                new SelectListItem() {Text = "3", Value="3"},
+                new SelectListItem() {Text = "4", Value="4"},
+                new SelectListItem() {Text = "5", Value="5"},
+                new SelectListItem() {Text = "6", Value="6"},
+                new SelectListItem() {Text = "7", Value="7"},
+                new SelectListItem() {Text = "8", Value="8"},
+                new SelectListItem() {Text = "9", Value="9"},
+                new SelectListItem() {Text = "10", Value="10"},
+                new SelectListItem() {Text = "11", Value="11"},
+                new SelectListItem() {Text = "12", Value="12"},
+                new SelectListItem() {Text = "13", Value="13"},
+                new SelectListItem() {Text = "14", Value="14"},
+                new SelectListItem() {Text = "15", Value="15"},
+                new SelectListItem() {Text = "16", Value="16"},
+                new SelectListItem() {Text = "17", Value="17"},
+                new SelectListItem() {Text = "18", Value="18"},
+                new SelectListItem() {Text = "19", Value="19"},
+                new SelectListItem() {Text = "20", Value="20"},
+                new SelectListItem() {Text = "21", Value="21"},
+                new SelectListItem() {Text = "22", Value="22"},
+                new SelectListItem() {Text = "23", Value="23"},
+                new SelectListItem() {Text = "24", Value="24"},
+                new SelectListItem() {Text = "25", Value="25"},
+                new SelectListItem() {Text = "26", Value="26"},
+                new SelectListItem() {Text = "27", Value="27"},
+                new SelectListItem() {Text = "28", Value="28"},
+                new SelectListItem() {Text = "29", Value="29"},
+                new SelectListItem() {Text = "30", Value="30"},
+                new SelectListItem() {Text = "31", Value="31"}}, "SELECC.", htmlAttributes: new { @id = "CicloCalc", @class = "form-control" })
+</div>
+
+<div class="form-group col-sm-2">
+    @Html.Label("Concepto", htmlAttributes: new { @class = "control-label" })
+    @Html.DropDownList("ConceptoCalc", new SelectListItem[]{
+                new SelectListItem() {Text = "1PLAY", Value="1PLAY"},
+                new SelectListItem() {Text = "2PLAY", Value="2PLAY"},
+                new SelectListItem() {Text = "3PLAY", Value="3PLAY"}}, "SELECC.", htmlAttributes: new { @class = "form-control" })
+</div>
+
+<div class="form-group col-sm-2">
+    @Html.Label("Servicio", htmlAttributes: new { @class = "control-label" })
+    @Html.DropDownList("ServicioCalc", new SelectListItem[]{
+                new SelectListItem() {Text = "INTERNET", Value="INTERNET"},
+                new SelectListItem() {Text = "TV", Value="TV"},
+                new SelectListItem() {Text = "TELEFONÍA", Value="TELEFONÍA"},
+                new SelectListItem() {Text = "INT+TLF", Value="INT+TLF"},
+                new SelectListItem() {Text = "INT+TV", Value="INT+TV"},
+                new SelectListItem() {Text = "TV+TLF", Value="TV+TLF"},
+                new SelectListItem() {Text = "INT+TV+TLF", Value="INT+TV+TLF"}}, "SELECC.", htmlAttributes: new { @class = "form-control" })
+</div>
+
+<div class="form-group">
+    @*<label>Nro Caso</label>*@
+    @*<input id="NroCaso" name="NroCaso" style="width:120px;" />*@
+    <label>Interacc Prom Anterior</label>
+    <input id="InteraccPromAnterior" name="InteraccPromAnterior" style="width:120px;" />
+    <label><input type="checkbox" id="PromocionAdelantadaBtn" data-toggle="collapse" data-target="#PromocionAdelantadaDiv,#PlantillaPromocionAdelantadaNCDiv" /> Prom Adelantada</label>
+    <label><input type="checkbox" id="PaquetesBtn" data-toggle="collapse" data-target="#PaquetesDiv" /> Paquetes</label>
+    <label><input type="checkbox" id="RealizoCambioPlanBtn" data-toggle="collapse" data-target="#RealizoCambioPlanDiv" /> Realizó Cambio de Plan</label>
+</div>
+
+<table class="table table-responsive modaltable">
+    <tr>
+        <td width="300px;">
+            <div class="collapse" id="PromocionAdelantadaDiv">
+                <div class="form-group">
+                    @Html.Label("Motivo de Promoción Adelantada", htmlAttributes: new { @class = "control-label" })
+                    @Html.DropDownList("MotivoProm", new SelectListItem[]{
+                    new SelectListItem() {Text = "ECONÓMICO", Value="ECONÓMICO"},
+                    new SelectListItem() {Text = "PROBLEMA TÉCNICO", Value="PROBLEMA TÉCNICO"},
+                    new SelectListItem() {Text = "PROBLEMA ADMINISTRATIVO", Value="PROBLEMA ADMINISTRATIVO"}}, "SELECCIONE", htmlAttributes: new { @class = "form-control especial2" })
+                </div>
+                <div class="form-group">
+                    @Html.Label("Nro de Factura", htmlAttributes: new { @class = "control-label" })
+                    @Html.Editor("NroFacturaProm", new { htmlAttributes = new { @class = "form-control especial2" } })
+                </div>
+                <div class="form-group">
+                    @Html.Label("Detalle de Motivo de Dscto", htmlAttributes: new { @class = "control-label" })
+                    @Html.Editor("DetalleMotivoProm", new { htmlAttributes = new { @class = "form-control especial2" } })
+                </div>
+            </div>
+
+            <div class="collapse" id="PlantillaPromocionAdelantadaNCDiv">
+                <div class="form-group">
+                    @Html.Label("Plantilla Promoción Adelantada N/C", htmlAttributes: new { @class = "control-label" })
+                    @Html.Editor("PlantillaPromocionAdelantadaNC", new { htmlAttributes = new { @class = "form-control promadel especial2", @readonly = "readonly" } })
+                </div>
+            </div>
+        </td>
+        <td>
+            <div class="collapse" id="PaquetesDiv">
+                <div class="form-group">
+                    @Html.Label("Paquete 1", htmlAttributes: new { @class = "control-label" })
+                    @Html.DropDownList("PaquetesPaq1", new SelectListItem[]{
+                    new SelectListItem() {Text = "FOX+ (Canales 10 SD y 07 HD)", Value="FOX+"},
+                    new SelectListItem() {Text = "HBO (Canales 09 SD y 09 HD)", Value="HBO"},
+                    new SelectListItem() {Text = "HD MAX (44 HD)", Value="HD MAX"},
+                    new SelectListItem() {Text = "GOLDEN PREMIER (Canales 02 SD y 02 HD)", Value="GOLDEN PREMIER"},
+                    new SelectListItem() {Text = "HOTPACK HD (Canales 03 SD y 01 HD)", Value="HOTPACK HD"},
+                    new SelectListItem() {Text = "NHK (Canal 01 SD)", Value="NHK"},
+                    new SelectListItem() {Text = "FIGHTING SPORTS NETWORK (Canales 01 SD y 01 HD)", Value="FIGHTING SPORTS NETWORK"},
+                    new SelectListItem() {Text = "UPGRADE DE HOGAR A CINE HD DIGITAL (Canales 38 SD y 09 HD)", Value="UPGRADE DE HOGAR A CINE HD DIGITAL"}}, "SELECCIONE", htmlAttributes: new { @class = "form-control especial2" })
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Costo Paquete 1", htmlAttributes: new { @class = "control-label" })
+                    @Html.Editor("CostoPaq1", new { htmlAttributes = new { @class = "form-control especial2", @readonly = "readonly" } })
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Paquete 2", htmlAttributes: new { @class = "control-label" })
+                    @Html.DropDownList("PaquetesPaq2", new SelectListItem[]{
+                    new SelectListItem() {Text = "FOX+ (Canales 10 SD y 07 HD)", Value="FOX+"},
+                    new SelectListItem() {Text = "HBO (Canales 09 SD y 09 HD)", Value="HBO"},
+                    new SelectListItem() {Text = "HD MAX (44 HD)", Value="HD MAX"},
+                    new SelectListItem() {Text = "GOLDEN PREMIER (Canales 02 SD y 02 HD)", Value="GOLDEN PREMIER"},
+                    new SelectListItem() {Text = "HOTPACK HD (Canales 03 SD y 01 HD)", Value="HOTPACK HD"},
+                    new SelectListItem() {Text = "NHK (Canal 01 SD)", Value="NHK"},
+                    new SelectListItem() {Text = "FIGHTING SPORTS NETWORK (Canales 01 SD y 01 HD)", Value="FIGHTING SPORTS NETWORK"},
+                    new SelectListItem() {Text = "UPGRADE DE HOGAR A CINE HD DIGITAL (Canales 38 SD y 09 HD)", Value="UPGRADE DE HOGAR A CINE HD DIGITAL"}}, "SELECCIONE", htmlAttributes: new { @class = "form-control especial2" })
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Costo Paquete 2", htmlAttributes: new { @class = "control-label" })
+                    @Html.Editor("CostoPaq2", new { htmlAttributes = new { @class = "form-control especial2", @readonly = "readonly" } })
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Paquete 3", htmlAttributes: new { @class = "control-label" })
+                    @Html.DropDownList("PaquetesPaq3", new SelectListItem[]{
+                    new SelectListItem() {Text = "FOX+ (Canales 10 SD y 07 HD)", Value="FOX+"},
+                    new SelectListItem() {Text = "HBO (Canales 09 SD y 09 HD)", Value="HBO"},
+                    new SelectListItem() {Text = "HD MAX (44 HD)", Value="HD MAX"},
+                    new SelectListItem() {Text = "GOLDEN PREMIER (Canales 02 SD y 02 HD)", Value="GOLDEN PREMIER"},
+                    new SelectListItem() {Text = "HOTPACK HD (Canales 03 SD y 01 HD)", Value="HOTPACK HD"},
+                    new SelectListItem() {Text = "NHK (Canal 01 SD)", Value="NHK"},
+                    new SelectListItem() {Text = "FIGHTING SPORTS NETWORK (Canales 01 SD y 01 HD)", Value="FIGHTING SPORTS NETWORK"},
+                    new SelectListItem() {Text = "UPGRADE DE HOGAR A CINE HD DIGITAL (Canales 38 SD y 09 HD)", Value="UPGRADE DE HOGAR A CINE HD DIGITAL"}}, "SELECCIONE", htmlAttributes: new { @class = "form-control especial2" })
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Costo Paquete 3", htmlAttributes: new { @class = "control-label" })
+                    @Html.Editor("CostoPaq3", new { htmlAttributes = new { @class = "form-control especial2", @readonly = "readonly" } })
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Mes de Paquete Activo", htmlAttributes: new { @class = "control-label" })
+                    @Html.DropDownList("MesPaq", new SelectListItem[]{
+                    new SelectListItem() {Text = "1", Value="1"},
+                    new SelectListItem() {Text = "2", Value="2"},
+                    new SelectListItem() {Text = "3", Value="3"}}, "SELECCIONE", htmlAttributes: new { @class = "form-control especial2" })
+                </div>
+            </div>
+        </td>
+        <td width="300px;">
+            <div class="collapse" id="RealizoCambioPlanDiv">
+                <div class="form-group">
+                    @Html.Label("CF Antiguo", htmlAttributes: new { @class = "control-label" })
+                    @Html.Editor("CFCamb", new { htmlAttributes = new { @class = "form-control especial3", @placeholder = "S./" } })
+                </div>
+            </div>
+            <div class="collapse" id="PlantillaPromocionSIACDiv">
+                <div class="form-group">
+                    @Html.Label("Plantilla Promoción SIAC", htmlAttributes: new { @class = "control-label" })
+                    @Html.Editor("PlantillaPromocionSIAC", new { htmlAttributes = new { @class = "form-control especial3 promsiac", @readonly = "readonly" } })
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Retenciones.Models.Edificio>
+
+@if (Model == null || Model.Count() == 0)
+{
+    <div class="alert alert-danger" role="alert">Lo sentimos, la dirección registrada aún no se encuentra dentro de la Zona de Cobertura</div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-bordered table-condensed table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Direccion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nodo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EdificioCodigo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Distrito)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FechaActivacion)
+                    </th>
+                </tr>
+            </thead>
+            <tbody style="font-size:x-small">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Direccion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nodo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EdificioCodigo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Distrito)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FechaActivacion)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

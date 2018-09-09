@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="~/favicon.ico">
+    <title>@ViewBag.Title - RETENCIONES</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("styles", required: false)
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("RETENCIONES", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                @if (Request.IsAuthenticated && User.IsInRole("Supervisor"))
+                {
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Gestiones
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>@Html.ActionLink("Gestiones Retenciones", "Index", "Gestion")</li>
+                                <li>@Html.ActionLink("Gestiones Carruseles", "Index", "GestionCarruseles")</li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Importaciones
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                @*<li>@Html.ActionLink("Importación Abonados", "Import", "Gestion")</li>*@
+                                <li>@Html.ActionLink("Importación Edificios Liberados", "ImportEdificio", "Gestion")</li>
+                                <li>@Html.ActionLink("Importación Carruseles", "Import", "GestionCarruseles")</li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Exportaciones
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>@Html.ActionLink("Exportación Retenciones", "Export", "Gestion")</li>
+                                <li>@Html.ActionLink("Exportación Carruseles", "Export", "GestionCarruseles")</li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Dashboards
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>@Html.ActionLink("Dashboard (En Línea)", "Dashboard", "Gestion")</li>
+                                <li>@Html.ActionLink("Dashboard (Por Fechas)", "Dashboard2", "Gestion")</li>
+                            </ul>
+                        </li>                    
+                        <li>@Html.ActionLink("Usuarios", "Index", "Account")</li>
+                    </ul>
+                }
+                else if (Request.IsAuthenticated && User.IsInRole("Asesor"))
+                {
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Gestión", "Index", "Gestion")</li>
+                    </ul>
+                }
+                else if (Request.IsAuthenticated && User.IsInRole("AsesorCarruseles"))
+                {
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Gestión Carruseles", "Index", "GestionCarruseles")</li>
+                    </ul>
+                }
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - DESARROLLO - TI</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

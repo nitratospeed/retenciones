@@ -1,0 +1,118 @@
+﻿    //PROMOCIONES
+<div class="form-group" align="center">
+    <button id="IngresoPromocionesBtn" class="btn btn-primary" type="button">Ingreso de Promociones</button>
+</div>
+
+<div class="modal fade" id="IngresoPromocionesDiv" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Ingreso de Promociones</h4>
+            </div>
+            <div class="modal-body modalpromo">
+                <div class="form-group col-sm-4">
+                    <div class="input-group">
+                        <div class="input-group-addon">Código de Cliente</div>
+                        @Html.Editor("CodigoClienteProm", new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    </div>
+                </div>
+
+                <div id="CustomerIdPromDiv" class="form-group col-sm-4">
+                    <div class="input-group">
+                        <div class="input-group-addon">Customer ID</div>
+                        @Html.Editor("CustomerIDProm", new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+
+                <div class="form-group" align="center">
+                    <button id="BtnOKPartial" class="btn btn-primary" type="button">OK</button>
+                </div>
+
+                <div id="Partial"></div>
+
+                <div id="DivBtnContinuar" class="form-group" align="center" style="display:none;">
+                    <button id="BtnContinuar" type="button" class="btn btn-success">CONTINUAR</button>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="AlertaPromocionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 style="text-align: center;" class="modal-title text-danger" id="myModalLabel">¡ALERTA!</h4>
+            </div>
+            <div class="modal-body">
+                <p style="text-align: center;">Se encontró que en los últimos 12 meses el cliente tiene N/C o OCC's</p>
+            </div>
+            <div class="modal-footer">
+                <button id="BtnContinuar2" type="button" class="btn btn-success">CONTINUAR</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    //DESCUENTOS
+<div class="modal fade" id="DescuentoCanalesPremiumDiv" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Descuentos y/o Canales Premium</h4>
+            </div>
+            <div class="modal-body">
+                @{ Html.RenderPartial("_PartialCalculo"); }
+            </div>
+            <div class="modal-footer">
+                <button id="PlantillaPromocionSIACBtn" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#PlantillaPromocionSIACDiv" aria-expanded="false" aria-controls="PlantillaPromocionSIACDiv">OK</button>
+                <button id="ActualizarSIAC" class="btn btn-success" type="button">Actualizar P.SIAC</button>
+                @*<button id="ActualizarAdelantada" class="btn btn-success" type="button">Actualizar P.Adelantada</button>*@
+                <button id="SpeechBtn" class="btn btn-default" type="button" data-toggle="modal" data-target="#SpeechModal">Speech</button>
+                <button id="ClosePlantillaG" class="btn btn-danger" type="button">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="SpeechModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Speech</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group" align="center">
+                    <textarea id="SpeechText" class="form-control speecharea"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" type="button" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">¡ALERTA!</h4>
+            </div>
+            <div class="modal-body">
+                <p style="text-align: center;">EL INICIO DE CICLO DE FACTURACIÓN DE ESTE CLIENTE ES EL DÍA DE MAÑANA, ENVIAR CORREO AL APOYO DE SUPERVISIÓN DE LA PLATAFORMA.</p>
+                <textarea id="MensajeAlerta" class="form-control alerta"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+    //

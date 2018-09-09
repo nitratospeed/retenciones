@@ -1,0 +1,74 @@
+﻿<div class="table-responsive">
+    <table class="table table-hover table-condensed">
+        <caption>RÁNKING ASESORES</caption>
+        <thead>
+            <tr>
+                @foreach (System.Data.DataColumn col in Model.Tables[0].Columns)
+            {
+                    <th>@col.Caption</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (System.Data.DataRow row in Model.Tables[0].Rows)
+            {
+                <tr>
+                    @foreach (var cell in row.ItemArray)
+                {
+                        <td>@cell.ToString()</td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-hover table-condensed">
+        <caption>TIPIFICACIONES</caption>
+        <thead>
+            <tr>
+                @foreach (System.Data.DataColumn col in Model.Tables[1].Columns)
+            {
+                    <th>@col.Caption</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (System.Data.DataRow row in Model.Tables[1].Rows)
+            {
+                <tr>
+                    @foreach (var cell in row.ItemArray)
+                {
+                        <td>@cell.ToString()</td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-hover table-condensed">
+        <caption>OFRECIMIENTOS</caption>
+        <thead>
+            <tr>
+                @foreach (System.Data.DataColumn col in Model.Tables[2].Columns)
+            {
+                    <th>@col.Caption</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (System.Data.DataRow row in Model.Tables[2].Rows)
+            {
+                <tr>
+                    @foreach (var cell in row.ItemArray)
+                {
+                        <td>@cell.ToString()</td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,786 @@
+﻿@using Microsoft.AspNet.Identity
+@using System.Security.Claims
+@model Retenciones.Models.Gestion
+
+@{
+    ViewBag.Title = "Registro";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+<hr />
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { name = "frm", id = "frm" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <input style="display:none;" type="text" id="Fullname" name="Fullname" value="@(((ClaimsIdentity)User.Identity).FindFirstValue("Fullname"))" />
+    <input style="display:none;" type="text" id="HiddenOfrecimientoId" name="HiddenOfrecimientoId" />
+
+    <div class="row">
+
+        <div class="col-sm-12">
+            <div class="form-group" align="center">
+                <div class="checkbox">
+                    <label>@Html.RadioButtonFor(model => model.TipoCliente, true, htmlAttributes: new { id = "ChkSGA", @class = "rbcreate" }) SGA</label>
+                    <label>@Html.RadioButtonFor(model => model.TipoCliente, false, htmlAttributes: new { id = "ChkSIAC", @class = "rbcreate" }) SIAC</label>
+                </div>
+                @Html.ValidationMessageFor(model => model.TipoCliente, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="form-group col-sm-2" id="CodigoSGADiv">
+                @Html.LabelFor(model => model.CodigoSGA, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.CodigoSGA, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CodigoSGA, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group col-sm-2" id="CustomerIDDiv">
+                @Html.LabelFor(model => model.CustomerID, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.CustomerID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CustomerID, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group col-sm-2" id="ContratoDiv">
+                @Html.LabelFor(model => model.Contrato, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.Contrato, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Contrato, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group col-sm-4">
+                @Html.LabelFor(model => model.NombreCliente, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.NombreCliente, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NombreCliente, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group col-sm-2">
+                @Html.LabelFor(model => model.DNI, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.DNI, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DNI, "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+
+        <div class="col-sm-12">
+            <div class="form-group col-sm-2">
+                @Html.LabelFor(model => model.TelefonoContacto1, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.TelefonoContacto1, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TelefonoContacto1, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group col-sm-2">
+                @Html.LabelFor(model => model.TelefonoContacto2, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.TelefonoContacto2, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TelefonoContacto2, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group col-sm-2">
+                @Html.LabelFor(model => model.TelefonoContacto3, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.TelefonoContacto3, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TelefonoContacto3, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group col-sm-3">
+                @Html.LabelFor(model => model.TieneEmail, htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.TieneEmail, new SelectListItem[]{
+            new SelectListItem() {Text = "SI TIENE", Value="SI TIENE"},
+            new SelectListItem() {Text = "NO TIENE", Value="NO TIENE"},
+            new SelectListItem() {Text = "NO DESEA BRINDAR", Value="NO DESEA BRINDAR"}}, "SELECCIONE", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TieneEmail, "", new { @class = "text-danger" })
+            </div>
+
+            <div id="DivEmail" class="form-group col-sm-3">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="form-group col-sm-3">
+                @Html.LabelFor(model => model.ResultadoRetencion, htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.ResultadoRetencion, new SelectListItem[]{
+                    new SelectListItem() {Text = "RETENIDO", Value="RETENIDO"},
+                    new SelectListItem() {Text = "BAJA", Value="BAJA"},
+                    new SelectListItem() {Text = "POR LO OFRECIDO", Value="POR LO OFRECIDO"},
+                    new SelectListItem() {Text = "LLAMADA VICIO", Value="LLAMADA VICIO"}}, "SELECCIONE", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ResultadoRetencion, "", new { @class = "text-danger" })
+            </div>
+
+            <div id="DivTipoBaja" class="form-group col-sm-3" style="display:none">
+                @Html.LabelFor(model => model.TipoBaja, htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.TipoBaja, new SelectListItem[]{
+                new SelectListItem() {Text = "BAJA POR UNIFICACIÓN", Value="BAJA POR UNIFICACIÓN"},
+                new SelectListItem() {Text = "CARRUSEL", Value="CARRUSEL"},
+                new SelectListItem() {Text = "HERENCIA", Value="HERENCIA"},
+                new SelectListItem() {Text = "MORA", Value="MORA"},
+                new SelectListItem() {Text = "NO SE PUEDE DAR OFREC. POR NP", Value="NO SE PUEDE DAR OFREC. POR NP"},
+                new SelectListItem() {Text = "REGULAR", Value="REGULAR"},
+                new SelectListItem() {Text = "REGULARIZACIÓN", Value="REGULARIZACIÓN"}}, "SELECCIONE", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TipoBaja, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group col-sm-3">
+                @Html.LabelFor(model => model.MotivoInicialId, "Motivo Inicial", htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownList("MotivoInicialId", null, "SELECCIONE", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MotivoInicialId, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group col-sm-3">
+                @Html.LabelFor(model => model.MotivoFinalId, "Motivo Final", htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.MotivoFinalId, null, "SELECCIONE", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MotivoFinalId, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group col-sm-3">
+                @Html.LabelFor(model => model.TipoSolicitud, htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.TipoSolicitud, new SelectListItem[]{
+                new SelectListItem() {Text = "Cancelación Total", Value="Cancelación Total"},
+                new SelectListItem() {Text = "Baja Parcial", Value="Baja Parcial"}}, "SELECCIONE", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TipoSolicitud, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div id="Ocultar">
+
+            <div class="col-sm-12">
+                <div class="form-group col-sm-3">
+                    @Html.LabelFor(model => model.OfrecimientoId, htmlAttributes: new { @class = "control-label" })
+                    @Html.DropDownListFor(model => model.OfrecimientoId, new SelectListItem[]{
+                new SelectListItem() {Text ="--- CAMBIO DE PLAN ---", Value="0", Disabled = true},
+                    new SelectListItem() {Text ="Ataque", Value="40"},
+                    new SelectListItem() {Text ="Plan Regular", Value="41"},
+                new SelectListItem() {Text ="--- NOTA DE CRÉDITO ---", Value="0", Disabled = true},
+                    new SelectListItem() {Text ="Nota de Crédito", Value="42"},
+                new SelectListItem() {Text ="--- PROMOCIÓN ADELANTADA ---", Value="0", Disabled = true},
+                    new SelectListItem() {Text ="Promoción Adelantada", Value="43"},
+                new SelectListItem() {Text ="--- VISITA TÉCNICA ---", Value="0", Disabled = true},
+                    new SelectListItem() {Text ="Visita Técnica", Value="44"},
+                new SelectListItem() {Text ="--- INFORMACIÓN ---", Value="0", Disabled = true},
+                    new SelectListItem() {Text ="Información", Value="45"},
+                new SelectListItem() {Text ="--- DESCUENTO DE s/. 50 ---", Value="0", Disabled = true},
+                    new SelectListItem() {Text ="Descuento de hasta S/ 50 por 1 meses para mantener CF por cambio a oferta vigente", Value="1"},
+                    new SelectListItem() {Text ="Descuento de hasta S/ 50 por 3 meses para mantener CF por cambio a oferta vigente", Value="2"},
+                    new SelectListItem() {Text ="Descuento de hasta S/ 50 por 6 meses para mantener CF por cambio a oferta vigente", Value="3"},
+                new SelectListItem() {Text ="--- PAQUETES DE CANALES SIN COSTO ---", Value="0", Disabled = true},
+                    new SelectListItem() {Text ="1 mes sin costo de paquete Cine HD Digital", Value="4"},
+                    new SelectListItem() {Text ="1 mes sin costo de paquete HBO", Value="5"},
+                    new SelectListItem() {Text ="1 mes sin costo de paquete FOX+", Value="6"},
+                    new SelectListItem() {Text ="1 mes sin costo de paquete HD MAX", Value="7"},
+                    new SelectListItem() {Text ="1 mes sin costo de paquete Golden Premiere", Value="8"},
+                    new SelectListItem() {Text ="1 mes sin costo de paquete Hotpack HD", Value="9"},
+                    new SelectListItem() {Text ="1 mes sin costo del canal Premium Sport Fighting Network (SFN)", Value="10"},
+                    new SelectListItem() {Text ="1 mes sin costo del canal Premium NHK", Value="11"},
+                    new SelectListItem() {Text ="2 meses sin costo de paquete Cine HD Digital", Value="12"},
+                    new SelectListItem() {Text ="2 meses sin costo de paquete HBO", Value="13"},
+                    new SelectListItem() {Text ="2 meses sin costo de paquete FOX+", Value="14"},
+                    new SelectListItem() {Text ="2 meses sin costo de paquete HD MAX", Value="15"},
+                    new SelectListItem() {Text ="2 meses sin costo de paquete Golden Premiere", Value="16"},
+                    new SelectListItem() {Text ="2 meses sin costo de paquete Hotpack HD", Value="17"},
+                    new SelectListItem() {Text ="2 meses sin costo del canal Premium Sport Fighting Network (SFN)", Value="18"},
+                    new SelectListItem() {Text ="2 meses sin costo del canal Premium NHK", Value="19"},
+                    new SelectListItem() {Text ="3 meses sin costo de paquete Cine HD Digital", Value="20"},
+                    new SelectListItem() {Text ="3 meses sin costo de paquete HBO", Value="21"},
+                    new SelectListItem() {Text ="3 meses sin costo de paquete FOX+", Value="22"},
+                    new SelectListItem() {Text ="3 meses sin costo de paquete HD MAX", Value="23"},
+                    new SelectListItem() {Text ="3 meses sin costo de paquete Golden Premiere", Value="24"},
+                    new SelectListItem() {Text ="3 meses sin costo de paquete Hotpack HD", Value="25"},
+                    new SelectListItem() {Text ="3 meses sin costo del canal Premium Sport Fighting Network (SFN)", Value="26"},
+                    new SelectListItem() {Text ="3 meses sin costo del canal Premium NHK", Value="27"},
+                new SelectListItem() {Text ="--- DESCUENTO DE 50% DEL CARGO FIJO ---", Value="0", Disabled = true},
+                    new SelectListItem() {Text ="Descuento de 50% por 1 mes, al cargo fijo", Value="28"},
+                    new SelectListItem() {Text ="Descuento de 50% por 3 meses, al cargo fijo", Value="29"},
+                    new SelectListItem() {Text ="Descuento de 50% por 6 meses, al cargo fijo", Value="30"},
+                new SelectListItem() {Text ="--- INSTALACIÓN DECO ADICIONAL SIN COSTO ---", Value="0", Disabled = true},
+                    new SelectListItem() {Text ="Instalación sin costo de decodificador adicional", Value="31"},
+                new SelectListItem() {Text ="--- ALQUILER DECO SIN COSTO ---", Value="0", Disabled = true},
+                    new SelectListItem() {Text ="Alquiler de decodificador básico (DTA HD) por 3 meses", Value="32"},
+                    new SelectListItem() {Text ="Alquiler de decodificador digital HD (DCX 525) por 3 meses", Value="33"},
+                    new SelectListItem() {Text ="Alquiler de decodificador grabador DVR (DCX 3510) por 3 meses", Value="34"},
+                new SelectListItem() {Text ="--- Traslado externo / interno sin costo ---", Value="0", Disabled = true},
+                    new SelectListItem() {Text ="Traslado externo / interno sin costo", Value="35"},
+                new SelectListItem() {Text ="--- Cambio de número telefónico sin costo ---", Value="0", Disabled = true},
+                    new SelectListItem() {Text ="Cambio de número telefónico sin costo", Value="36"},
+                new SelectListItem() {Text ="--- Suspensión temporal del servicio ---", Value="0", Disabled = true},
+                    new SelectListItem() {Text ="Suspensión temporal del servicio (60 días al año como máximo) sin costo de reconexión", Value="37"},
+                new SelectListItem() {Text ="--- Entrega de puntos Claro Club ---", Value="0", Disabled = true},
+                    new SelectListItem() {Text ="Entrega de puntos Claro Club (1 play, 80 ptos, 2 play 130 ptos, 3 play 210 ptos)", Value="38"}}, htmlAttributes: new { @class = "form-control", @multiple = "multiple" })
+                    @Html.ValidationMessageFor(model => model.OfrecimientoId, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group col-sm-2">
+                    @Html.LabelFor(model => model.CambioPlanMigracion, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.CambioPlanMigracion, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CambioPlanMigracion, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group col-sm-2">
+                    @Html.LabelFor(model => model.Decos, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Decos, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Decos, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group col-sm-2">
+                    @Html.LabelFor(model => model.Canales, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Canales, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Canales, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group col-sm-3">
+                    @Html.LabelFor(model => model.NuevoPrecio, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.NuevoPrecio, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NuevoPrecio, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-sm-12">
+                <div class="form-group col-sm-2">
+                    @Html.Label("Tiene Oferta Otro Oper?", htmlAttributes: new { @class = "control-label" })
+                    @Html.DropDownListFor(model => model.TieneOfertaOtro, new SelectListItem[]{
+                new SelectListItem() {Text = "SI", Value="SI"},
+                new SelectListItem() {Text = "NO", Value="NO"}}, "SELECCIONE", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.TieneOfertaOtro, "", new { @class = "text-danger" })
+                </div>
+
+                <div id="DivPlanOfrecido" class="form-group col-sm-3">
+                    @Html.LabelFor(model => model.PlanOfrecido, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.PlanOfrecido, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PlanOfrecido, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group col-sm-3">
+                    @Html.LabelFor(model => model.SeDerivaId, "Se Deriva", htmlAttributes: new { @class = "control-label" })
+                    @Html.DropDownList("SeDerivaId", null, "SELECCIONE", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.SeDerivaId, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group col-sm-4">
+                    @Html.LabelFor(model => model.UsuarioDerivaId, "Usuario Deriva", htmlAttributes: new { @class = "control-label" })
+                    @Html.DropDownListFor(model => model.UsuarioDerivaId, null, "SELECCIONE", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.UsuarioDerivaId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-sm-12">
+                <div class="form-group col-sm-2">
+                    @Html.Label("Fue Ret Super?", htmlAttributes: new { @class = "control-label" })
+                    @Html.DropDownListFor(model => model.FueRetenido, new SelectListItem[]{
+                new SelectListItem() {Text = "SI", Value="SI"},
+                new SelectListItem() {Text = "NO", Value="NO"}}, "SELECCIONE", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.FueRetenido, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group col-sm-3" id="EscojaDiv">
+                    @Html.LabelFor(model => model.Escoja, htmlAttributes: new { @class = "control-label" })
+                    @Html.DropDownListFor(model => model.Escoja, new SelectListItem[]{
+                new SelectListItem() {Text = "Angel Larriviere", Value="Angel Larriviere"},
+                new SelectListItem() {Text = "Daniel Mayorga", Value="Daniel Mayorga"},
+                new SelectListItem() {Text = "Enrique Villaseñor", Value="Enrique Villaseñor"},
+                new SelectListItem() {Text = "John Miranda", Value="John Miranda"},
+                new SelectListItem() {Text = "ROCÍO NÚÑEZ", Value="ROCÍO NÚÑEZ"},
+                new SelectListItem() {Text = "WILSON DÍAZ", Value="WILSON DÍAZ"}}, "SELECCIONE", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Escoja, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group col-sm-4" id="PorqueDiv" style="display:none;">
+                    @Html.LabelFor(model => model.Porque, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Porque, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Porque, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group col-sm-2">
+                    @Html.LabelFor(model => model.Origen, htmlAttributes: new { @class = "control-label" })
+                    @Html.DropDownListFor(model => model.Origen, new SelectListItem[]{
+                new SelectListItem() {Text = "CAC", Value="CAC"},
+                new SelectListItem() {Text = "CALL CENTER", Value="CALL CENTER"}}, "SELECCIONE", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Origen, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group col-sm-4">
+                    @Html.LabelFor(model => model.Locacion, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Locacion, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Locacion, "", new { @class = "text-danger" })
+                </div>
+            </div>      
+        </div>
+
+        <div class="form-group" align="center">
+            @Html.LabelFor(model => model.Observaciones, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.Observaciones, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Observaciones, "", new { @class = "text-danger" })
+        </div>
+
+        <div align="center">
+            @Html.Label("Plantillas", htmlAttributes: new { @class = "control-label" })
+        </div>
+
+        <div class="form-group" align="center">
+            <div id="Plantillas" class="btn-group btn-group-sm" role="group" aria-label="...">
+                <button id="PlantillaMigracionBtn" class="btn btn-primary" type="button" data-toggle="modal" data-target="#PlantillaMigracionDiv" data-parent="#Plantillas" aria-expanded="false" aria-controls="PlantillaMigracionDiv">Migración</button>
+                <button id="PlantillaVisitaTecnicaBtn" class="btn btn-primary" type="button" data-toggle="modal" data-target="#PlantillaVisitaTecnicaDiv" data-parent="#Plantillas" aria-expanded="false" aria-controls="PlantillaVisitaTecnicaDiv">Visita Técnica</button>
+                <button id="PlantillaTrasladoExternoSGABtn" class="btn btn-primary" type="button" data-toggle="modal" data-target="#PlantillaTrasladoExternoSGADiv" data-parent="#Plantillas" aria-expanded="false" aria-controls="PlantillaTrasladoExternoSGADiv">Traslado Externo (SGA)</button>
+                <button id="PlantillaPromocionSGABtn" class="btn btn-primary" type="button" data-toggle="modal" data-target="#PlantillaPromocionSGADiv" data-parent="#Plantillas" aria-expanded="false" aria-controls="PlantillaPromocionSGADiv">Promoción (SGA)</button>
+                <button id="PlantillaSuspensionTemporalBtn" class="btn btn-primary" type="button" data-toggle="modal" data-target="#PlantillaSuspensionTemporalDiv" data-parent="#Plantillas" aria-expanded="false" aria-controls="PlantillaSuspensionTemporalDiv">Suspensión Temporal</button>
+                <button id="PlantillaRegistroRetenidosBtn" class="btn btn-primary" type="button" data-toggle="modal" data-target="#PlantillaRegistroRetenidosDiv" data-parent="#Plantillas" aria-expanded="false" aria-controls="PlantillaRegistroRetenidosDiv">De Cancelación</button>
+                <button id="PlantillaSeguimientoSOTBtn" class="btn btn-primary" type="button" data-toggle="modal" data-target="#PlantillaSeguimientoSOTDiv" data-parent="#Plantillas" aria-expanded="false" aria-controls="PlantillaSeguimientoSOTDiv">Seguimiento SOT</button>
+            
+                <button id="Ofrecimientos" class="btn btn-danger" type="button" data-toggle="modal" data-target="#OfrecimientosDiv" data-parent="#Plantillas" aria-expanded="false" aria-controls="Ofrecimientos">Ofrecimientos</button>
+            </div>
+        </div>
+
+        <div class="modal fade" id="OfrecimientosDiv" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog modal-lg DialogOfre" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Ofrecimientos</h4>
+                    </div>
+                    <div class="modal-body resizemodal">
+
+                        <div>
+                            <label>Motivo Baja</label>
+                            <select id="MotivoBajaOfre" name="MotivoBajaOfre">
+                                <option value="">SELECCIONE</option>
+                                <option value="TÉCNICO">TÉCNICO</option>
+                                <option value="ECONÓMICOS">ECONÓMICOS</option>
+                                <option value="ADMINISTRATIVO">ADMINISTRATIVO</option>
+                                <option value="COMPETENCIA (VIAJE/NO USO/MUDANZA SIN COBERTURA)">COMPETENCIA (VIAJE/NO USO/MUDANZA SIN COBERTURA)</option>
+                                <option value="MUDANZA CON COBERTURA">MUDANZA CON COBERTURA</option>
+                                <option value="CARRUSEL">CARRUSEL</option>
+                                <option value="MALA VENTA">MALA VENTA</option>
+                            </select>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table id="TableOfrecimientos2" class="table table-condensed table-bordered verticalOfre">
+                                <thead>
+                                    <tr>
+                                        <th style="width:200px;text-align:center">ESCENARIO</th>
+                                        <th style="text-align:center">ACCIÓN / OFRECIMIENTO</th>
+                                        <th style="text-align:center">SPEECH</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr id="Tra">
+                                        <td colspan="2"><p style="text-align:center">NIVEL 1</p></td>
+                                    </tr>
+                                    <tr id="Tr1">
+                                        <td>
+                                            <label>Antigüedad: </label>
+                                                @foreach (var item1 in ViewBag.AntiguedadOfre)
+                                                {
+                                                    <p><input type="radio" id="AntiguedadOfre" name="AntiguedadOfre" value="@item1.Value" /> @item1.Text</p>
+                                                }
+                                        </td>
+                                        <td><pre id="IdeaFuerza1"></pre></td>
+                                        <td>
+                                            <a id="Speech1" tabindex="0" class="btn btn-sm btn-primary" role="button" data-toggle="popover" data-trigger="focus" title="Speech" data-content="">Ver Speech</a>
+                                        </td>
+                                    </tr>
+                                    <tr id="Tr2">
+                                        <td>
+                                            <label>Problemas Técnicos: </label>
+                                            @foreach (var item4 in ViewBag.ProblemasTecOfre)
+                                            {
+                                                <p><input type="radio" id="ProblemasTecOfre" name="ProblemasTecOfre" value="@item4.Value" /> @item4.Text</p>
+                                            }
+                                        </td>
+                                        <td><pre id="IdeaFuerza2"></pre></td>
+                                        <td>
+                                            <a id="Speech2" tabindex="0" class="btn btn-sm btn-primary" role="button" data-toggle="popover" data-trigger="focus" title="Speech" data-content="">Ver Speech</a>
+                                        </td>
+                                    </tr>
+                                    <tr id="Tr3">
+                                        <td>
+                                            <label>Reportes de Facturación: </label>
+                                            @foreach (var item5 in ViewBag.ReportesFactOfre)
+                                            {
+                                                <p><input type="radio" id="ReportesFactOfre" name="ReportesFactOfre" value="@item5.Value" /> @item5.Text</p>
+                                            }
+                                        </td>
+                                        <td><pre id="IdeaFuerza3"></pre></td>
+                                        <td>
+                                            <a id="Speech3" tabindex="0" class="btn btn-sm btn-primary" role="button" data-toggle="popover" data-trigger="focus" title="Speech" data-content="">Ver Speech</a>
+                                        </td>
+                                    </tr>
+                                    <tr id="Tr4">
+                                        <td>
+                                            <label>Servicios Contratados: </label>
+                                            @foreach (var item6 in ViewBag.ServiciosOfre)
+                                            {
+                                                <p><input type="radio" id="ServiciosOfre" name="ServiciosOfre" value="@item6.Value" /> @item6.Text</p>
+                                            }
+                                        </td>
+                                        <td><pre id="IdeaFuerza4"></pre></td>
+                                        <td>
+                                            <a id="Speech4" tabindex="0" class="btn btn-sm btn-primary" role="button" data-toggle="popover" data-trigger="focus" title="Speech" data-content="">Ver Speech</a>
+                                        </td>
+                                    </tr>
+                                    <tr id="Trb">
+                                        <td colspan="2"><p style="text-align:center">NIVEL 2</p></td>
+                                    </tr>
+                                    <tr id="Tr5">
+                                        <td>
+                                            <label>Estado de Cuenta: </label>
+                                            @foreach (var item2 in ViewBag.EstadoCuentaOfre)
+                                            {
+                                                <p><input type="radio" id="EstadoCuentaOfre" name="EstadoCuentaOfre" value="@item2.Value" /> @item2.Text</p>
+                                            }
+                                        </td>
+                                        <td><pre id="IdeaFuerza6"></pre></td>
+                                        <td>
+                                            <a id="Speech6" tabindex="0" class="btn btn-sm btn-primary" role="button" data-toggle="popover" data-trigger="focus" title="Speech" data-content="">Ver Speech</a>
+                                        </td>
+                                    </tr>
+                                    <tr id="Tr6">
+                                        <td>
+                                            <label>Descuento por Retenciones: </label>
+                                            @foreach (var item3 in ViewBag.DsctoRetencionesOfre)
+                                            {
+                                                <p><input type="radio" id="DsctoRetencionesOfre" name="DsctoRetencionesOfre" value="@item3.Value" /> @item3.Text</p>
+                                            }
+                                        </td>
+                                        <td><pre id="IdeaFuerza5"></pre></td>
+                                        <td>
+                                            <a id="Speech5" tabindex="0" class="btn btn-sm btn-primary" role="button" data-toggle="popover" data-trigger="focus" title="Speech" data-content="">Ver Speech</a>
+                                        </td>
+                                    </tr>
+                                    <tr id="Tr7">
+                                        <td>
+                                            <label>Suspensión: </label>
+                                        </td>
+                                        <td><pre>Suspensión del Servicio</pre></td>
+                                        <td>
+                                            <a id="Speech7" tabindex="0" class="btn btn-sm btn-primary" role="button" data-toggle="popover" data-trigger="focus" title="Speech" data-content="Sñr.(x) Que le parece si suspendemos temporalmente el servicio por (x) meses ,nosotros no le cobraremos por la reconexion la cual es de manera automatica  y es mas  de esta manera usted evitara perder sus beneficios acumulados .">Ver Speech</a>
+                                        </td>
+                                    </tr>
+                                    <tr id="Tr8">
+                                        <td>
+                                            <label>Cambio de Titularidad: </label>
+                                        </td>
+                                        <td><pre>Cambio de Titularidad</pre></td>
+                                        <td>
+                                            <a id="Speech8" tabindex="0" class="btn btn-sm btn-primary" role="button" data-toggle="popover" data-trigger="focus" title="Speech" data-content="Sñr.(x) Tendra algun fmiliar o amigo que este interesado en contratar los servicios , para que le realice un cambio de titularidad , de esta manera la persona interesada podra aprovechar sus beneficios acumulados a lo largo de todo este tiempo, ademas evitara pasar por una evaluacion que claro realiza para cada cliente nuevo y sobretodo ya no pagara por instacion ni equipos. ">Ver Speech</a>                                        
+                                        </td>
+                                    </tr>
+                                    <tr id="Tr9">
+                                        <td>
+                                            <label>Traslados Externos: </label>
+                                        </td>
+                                        <td><pre>Traslado externo sin costo</pre></td>
+                                        <td>
+                                            <a id="Speech9" tabindex="0" class="btn btn-sm btn-primary" role="button" data-toggle="popover" data-trigger="focus" title="Speech" data-content="Sñr.(x) Nosotros le podemos realizar un t.e sin ningun inconveniente  de esta forma ud. Estaria evitando pagar  una nueva instalacion , tener un nueno contrato con otro operador.Tome en cuenta que si mantiene el servicio con nosotros usted se ira fidelizando cada vez mas y podria ir acumulando beneficios a futuro.">Ver Speech</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>                      
+                    </div>
+                    <div class="modal-footer">
+                        <h4 style="display: inline-block; margin: 0; color:red;">Si no acepta nada, preguntar: "Si tiene alguna oferta de la competencia, dígamela que yo se la puedo mejorar", y ofrecer Planes Ataque</h4>
+                        <button id="BtnCerrar" type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="PlantillaMigracionDiv" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Plantilla Migración</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group" id="PlantillaMigracionDiv1">
+                            @Html.LabelFor(model => model.PlantillaMigracion, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.PlantillaMigracion, new { htmlAttributes = new { @class = "form-control pmig" } })
+                            @Html.ValidationMessageFor(model => model.PlantillaMigracion, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group" id="PlantillaMigracionDiv2">
+                            @Html.LabelFor(model => model.SOTMigracion, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.SOTMigracion, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.SOTMigracion, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="PlantillaVisitaTecnicaDiv" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Plantilla Visita Técnica</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PlantillaVisitaTecnica, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.PlantillaVisitaTecnica, new { htmlAttributes = new { @class = "form-control pvis" } })
+                            @Html.ValidationMessageFor(model => model.PlantillaVisitaTecnica, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.SOTVisitaTecnica, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.SOTVisitaTecnica, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.SOTVisitaTecnica, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="PlantillaTrasladoExternoSGADiv" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Plantilla Traslado Externo</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group" id="PlantillaTrasladoExternoSGADiv1">
+                            @Html.LabelFor(model => model.PlantillaTrasladoExternoSGA, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.PlantillaTrasladoExternoSGA, new { htmlAttributes = new { @class = "form-control ptras" } })
+                            @Html.ValidationMessageFor(model => model.PlantillaTrasladoExternoSGA, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group" id="PlantillaTrasladoExternoSGADiv2">
+                            @Html.LabelFor(model => model.SOTTrasladoExternoSGA, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.SOTTrasladoExternoSGA, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.SOTTrasladoExternoSGA, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="PlantillaPromocionSGADiv" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Plantilla Promoción (SGA)</h4>
+                    </div>
+                    <div class="modal-body">
+                        @Html.LabelFor(model => model.PlantillaPromocionSGA, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.PlantillaPromocionSGA, new { htmlAttributes = new { @class = "form-control ppro" } })
+                        @Html.ValidationMessageFor(model => model.PlantillaPromocionSGA, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="PlantillaSuspensionTemporalDiv" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Plantilla Suspensión Temporal</h4>
+                    </div>
+                    <div class="modal-body">
+                        @Html.LabelFor(model => model.PlantillaSuspensionTemporal, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.PlantillaSuspensionTemporal, new { htmlAttributes = new { @class = "form-control psus" } })
+                        @Html.ValidationMessageFor(model => model.PlantillaSuspensionTemporal, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="PlantillaRegistroRetenidosDiv" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Plantilla de Cancelación</h4>
+                    </div>
+                    <div class="modal-body">
+                        @Html.Label("Plantilla de Cancelación", htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.PlantillaRegistroRetenidos, new { htmlAttributes = new { @class = "form-control preg" } })
+                        @Html.ValidationMessageFor(model => model.PlantillaRegistroRetenidos, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="PlantillaSeguimientoSOTDiv" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Plantilla Seguimiento SOT</h4>
+                    </div>
+                    <div class="modal-body">
+                        @Html.LabelFor(model => model.PlantillaSeguimientoSOT, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.PlantillaSeguimientoSOT, new { htmlAttributes = new { @class = "form-control pseg" } })
+                        @Html.ValidationMessageFor(model => model.PlantillaSeguimientoSOT, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group" align="center">
+            <button id="DescuentoCanalesPremiumBtn" class="btn btn-primary" type="button" data-toggle="modal" data-target="#DescuentoCanalesPremiumDiv" data-backdrop="static" data-keyboard="false" aria-expanded="false" aria-controls="DescuentoCanalesPremiumDiv">Descuento y/o Canales Premium</button>
+        </div>
+
+        <div class="modal fade" id="DescuentoCanalesPremiumDiv" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Descuentos y/o Canales Premium</h4>
+                    </div>
+                    <div class="modal-body">
+                        @{ Html.RenderPartial("_PartialCalculo"); }
+                    </div>
+                    <div class="modal-footer">
+                        <button id="PlantillaPromocionSIACBtn" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#PlantillaPromocionSIACDiv" aria-expanded="false" aria-controls="PlantillaPromocionSIACDiv">OK</button>
+                        <button id="ActualizarSIAC" class="btn btn-success" type="button">Actualizar P.SIAC</button>
+                        <button id="ActualizarAdelantada" class="btn btn-success" type="button">Actualizar P.Adelantada</button>
+                        <button id="SpeechBtn" class="btn btn-default" type="button" data-toggle="modal" data-target="#SpeechModal">Speech</button>
+                        <button id="ClosePlantillaG" class="btn btn-danger" type="button">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="SpeechModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Speech</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group" align="center">
+                            <textarea id="SpeechText" class="form-control speecharea"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-danger" type="button" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">¡ALERTA!</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p style="text-align: center;">EL INICIO DE CICLO DE FACTURACIÓN DE ESTE CLIENTE ES EL DÍA DE MAÑANA, ENVIAR CORREO AL APOYO DE SUPERVISIÓN DE LA PLATAFORMA.</p>
+                        <textarea id="MensajeAlerta" class="form-control alerta"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @*<div class="form-group" align="center">
+            <div class="checkbox">
+                <label>@Html.CheckBoxFor(model => model.Pendiente) Pendiente</label>
+                @Html.ValidationMessageFor(model => model.Pendiente, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        <div class="form-group" align="center">
+            <button id="EdificiosLiberadosBtn" class="btn btn-primary" type="button" data-toggle="modal" data-target="#EdificiosLiberadosDiv" data-backdrop="static" data-keyboard="false" aria-expanded="false" aria-controls="EdificiosLiberadosDiv">Edificios Liberados</button>
+        </div>
+
+        <div class="modal fade" id="EdificiosLiberadosDiv" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Edificios Liberados</h4>
+                    </div>
+                    <div class="modal-body">
+                        <label>Dirección</label>
+                        <input type="text" id="DireccionEdificio" name="DireccionEdificio"/>
+
+                        <label>Distrito</label>
+                        <input type="text" id="DistritoEdificio" name="DistritoEdificio" />
+
+                        <button type="button" id="BtnBuscarEdificio">Buscar</button>
+
+                        <hr />
+
+                        <div id="PartialEdificios"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="InteraccionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group" align="center">
+                            @Html.LabelFor(model => model.NroInteraccion, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.NroInteraccion, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NroInteraccion, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" value="Registrar" class="btn btn-success" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group" align="center">
+            <button class="btn btn-success" id="BtnToInteraccion" type="button">Registrar</button>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Regresar a la lista", "Index")
+</div>
+
+@section Styles {
+    @Styles.Render("~/Content/jqueryuicss")
+    @Styles.Render("~/Content/multiselectcss")
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/multiselect")
+    @Scripts.Render("~/bundles/gestioncreate")
+}

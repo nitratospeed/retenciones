@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Retenciones.Models.GestionCarruseles>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <caption>
+        @using (Html.BeginForm())
+        {
+            <p>@ViewBag.CountCarruseles Carruseles / @ViewBag.CountNoCarruseles No Carruseles / @ViewBag.Gestionados Gestionados / @ViewBag.NoGestionados No Gestionados</p>
+            <p>
+                Mostrar Registros Gestionados: <input type="submit" value="Buscar" name="Gestionados" />
+            </p>
+
+            <p>
+                @Html.ActionLink("Mostrar Registros por Gestionar", "Index")
+            </p>
+        }
+    </caption>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaGeneracion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SOTBaja)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CodigoSGAAntiguo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClienteAntiguo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+var style = (item.Pendiente == true) ? "danger" : "";
+    <tr class="@style">
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaGeneracion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SOTBaja)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CodigoSGAAntiguo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClienteAntiguo)
+        </td>
+        @if (item.FechaGestion == null)
+        {
+            <td>
+                @if (User.IsInRole("AsesorCarruseles"))
+                {
+                    @Html.ActionLink("Gestionar", "Edit", new { id = item.Id }) @:|
+                }
+                @Html.ActionLink("Detalles", "Details", new { id = item.Id })
+            </td>
+        }
+        else
+        {
+            <td>
+                @if (item.Pendiente == true || User.IsInRole("Supervisor"))
+                {
+                    @Html.ActionLink("Editar", "Edit", new { id = item.Id }) @:|
+                }
+                @Html.ActionLink("Detalles", "Details", new { id = item.Id })
+            </td>
+        }
+    </tr>
+}
+
+</table>

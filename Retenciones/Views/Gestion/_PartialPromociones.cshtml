@@ -1,0 +1,126 @@
+﻿<table class="table table-bordered table-hover table-condensed">
+    <caption>(PROYECTOS / ANTIGÜEDAD)</caption>
+    <thead>
+        <tr>
+            @foreach (System.Data.DataColumn col in Model.Tables[0].Columns)
+             {
+                <th>@col.Caption</th>
+             }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (System.Data.DataRow row in Model.Tables[0].Rows)
+         {
+            <tr>
+                <td class="tdproyecto">@row.ItemArray[0].ToString()</td>
+                <td class="tdantiguedad">@row.ItemArray[1].ToString()</td>
+                <td class="tdmeses" style="display:none;">@row.ItemArray[2].ToString()</td>
+                <td><button class="BtnEscoger" type="button">Escoger</button></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div id="TablesHidden" style="display:none;">
+    <table id="TbOccSiac" class="table table-bordered table-hover table-condensed">
+        <caption>OCC SIAC</caption>
+        <thead>
+            <tr>
+                @foreach (System.Data.DataColumn col in Model.Tables[1].Columns)
+                 {
+                    <th>@col.Caption</th>
+                 }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (System.Data.DataRow row in Model.Tables[1].Rows)
+             {
+                <tr>
+                    <td>@row.ItemArray[0].ToString()</td>
+                    <td>@row.ItemArray[1].ToString()</td>
+                    <td>@row.ItemArray[2].ToString()</td>
+                    <td>@row.ItemArray[3].ToString()</td>
+                    <td>@row.ItemArray[4].ToString()</td>
+                    <td class="tdOccSiacDate" style="display:none;">@row.ItemArray[5].ToString()</td>
+                </tr>
+             }
+        </tbody>
+    </table>
+
+    <table id="TbNcSiac" class="table table-bordered table-hover table-condensed">
+        <caption>N/C SIAC</caption>
+        <thead>
+            <tr>
+                @foreach (System.Data.DataColumn col in Model.Tables[2].Columns)
+                 {
+                    <th>@col.Caption</th>
+                 }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (System.Data.DataRow row in Model.Tables[2].Rows)
+             {
+                <tr>
+                    <td>@row.ItemArray[0].ToString()</td>
+                    <td>@row.ItemArray[1].ToString()</td>
+                    <td>@row.ItemArray[2].ToString()</td>
+                    <td>@row.ItemArray[3].ToString()</td>
+                    <td>@row.ItemArray[4].ToString()</td>
+                    <td class="tdNcSiacDate" style="display:none;">@row.ItemArray[5].ToString()</td>
+                </tr>
+             }
+        </tbody>
+    </table>
+
+    <div></div>
+
+    <table id="TbPromoSGA" class="table table-bordered table-hover table-condensed">
+        <caption>PROMO SGA</caption>
+        <thead>
+            <tr>
+                @foreach (System.Data.DataColumn col in Model.Tables[3].Columns)
+                 {
+                    <th>@col.Caption</th>
+                 }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (System.Data.DataRow row in Model.Tables[3].Rows)
+             {
+                <tr>
+                    <td>@row.ItemArray[0].ToString()</td>
+                    <td>@row.ItemArray[1].ToString()</td>
+                    <td>@row.ItemArray[2].ToString()</td>
+                    <td>@row.ItemArray[3].ToString()</td>
+                    <td class="tdPromoSGADate" style="display:none;">@row.ItemArray[4].ToString()</td>
+                </tr>
+             }
+        </tbody>
+    </table>
+
+    <table id="TbNcSGA" class="table table-bordered table-hover table-condensed">
+        <caption>N/C SGA</caption>
+        <thead>
+            <tr>
+                @foreach (System.Data.DataColumn col in Model.Tables[4].Columns)
+                 {
+                    <th>@col.Caption</th>
+                 }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (System.Data.DataRow row in Model.Tables[4].Rows)
+             {
+                <tr>
+                    <td>@row.ItemArray[0].ToString()</td>
+                    <td>@row.ItemArray[1].ToString()</td>
+                    <td>@row.ItemArray[2].ToString()</td>
+                    <td>@row.ItemArray[3].ToString()</td>
+                    <td>@row.ItemArray[4].ToString()</td>
+                    <td>@row.ItemArray[5].ToString()</td>
+                    <td class="tdNcSGADate" style="display:none;">@row.ItemArray[6].ToString()</td>
+                </tr>
+             }
+        </tbody>
+    </table>
+</div>

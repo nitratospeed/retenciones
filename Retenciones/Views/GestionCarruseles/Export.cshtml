@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Exportar Carruseles";
+}
+
+<h2>Exportar Carruseles</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <hr />
+        <div class="form-group">
+            @Html.Label("Fecha Inicio", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.Editor("FechaInicio", new { htmlAttributes = new { @Value = @DateTime.Now.Date.ToString("yyyy-MM-dd"), @class = "form-control datepicker", @style = "max-width: 280px;" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Fecha Fin", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.Editor("FechaFin", new { htmlAttributes = new { @Value = @DateTime.Now.Date.ToString("yyyy-MM-dd"), @class = "form-control datepicker", @style = "max-width: 280px;" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Exportar" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+@section Styles {
+    @Styles.Render("~/Content/jqueryuicss")
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/Scripts/datepicker.js")
+}
